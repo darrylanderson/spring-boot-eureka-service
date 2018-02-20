@@ -1,0 +1,34 @@
+plugins {
+    // Use the Spring Boot Gradle plugin, which automatically applies the dependency management plugin
+    // and configures it to import the spring-boot-starter-parent bom.
+    id 'org.springframework.boot' version '1.5.10.RELEASE'
+}
+
+apply plugin: 'java'
+
+group 'atc'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        // Import the Spring Cloud BOM
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2'
+    }
+}
+
+apply plugin: 'java'
+
+dependencies {
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka-server'
+}
+
+// Gradle wrapper
+task wrapper( type: Wrapper ) {
+    gradleVersion = '4.5.1'
+}
+
